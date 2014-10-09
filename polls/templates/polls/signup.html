@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<html>
+	{% load staticfiles %}
+	<head>
+		<title>Sign up for an account</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+	</head>
+	<body>
+		<h1>Signup for an account</h1>
+		<a href="{% url 'polls:login' %}">Back to Login</a>
+		<form method="post" action="">{% csrf_token %}
+			{% if form.non_field_errors %}
+			<p><span class="error">{{ form.non_field_errors }}</span></p>
+			{% endif %}
+			<p>{% if form.username.errors %}
+			<span class="error">{{ form.non_field_errors }}</span>
+			{% endif %}</p>
+			<p><label for="id_username">Username:</label>
+			    <input type="text" name="username" value="" id="username" /></p>
+			<p>{% if form.email.error %}
+			<span class="error">
+			{{ form.email.error }}
+			</span>
+			{% endif %}</p>
+			<p><label for="id_name">Your Email Address:</label>
+			<input type="text" name="email" value="" id="email" /></p>
+			<p>{% if form.password1.errors %}
+			<span class="error">
+			{{ form.password1.errors }}</span>
+			{% endif %}</p>
+			<p><lable for="id_password1">Password:</lable>
+			<input type="password" name="password1" value="" id="password1" /></p>
+			<p>{% if form.password2.errors %}
+			<span class="error">
+			{{ form.password2.errors }}</span>
+			{% endif %}</p>
+			<p><lable for="id_password2">Confirm Password:</lable>
+			<input type="password" name="password2" value="" id="password2" /></p>
+			<p><input type="submit" name="Sign Up" /></p>
+		
+		</form>
+	</body>
+</html>
+{% endblock %}

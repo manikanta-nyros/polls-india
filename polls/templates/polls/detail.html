@@ -1,0 +1,376 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+    {% block content %}
+    {% load staticfiles %}
+    <head>
+	    <title>{% block title %}choices for question{% endblock %}</title>
+	    <meta></meta>
+        <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+        <link href="{% static 'polls/css/3.css' %}" rel="stylesheet" media="screen">
+        <link rel="stylesheet" type="text/css" href="{% static 'polls/css/jquery-ui.css' %}" />
+		<link rel="stylesheet" href="{% static 'polls/css/style1.css' %}">
+		<script src="{% static 'polls/js/jquery-1.10.2.js' %}"></script>
+		<script src="{% static 'polls/js/bootstrap.js' %}"></script>
+		<script src="{% static 'polls/js/jquery-ui.js' %}"></script>
+		<script>
+  $(function() {
+    $(document).tooltip({
+   content: function () {
+     return ( ( $( this ).prop( 'title' ).replace( '|', '<br />' ) ) );
+   }
+});
+    $( document ).tooltip({
+      position: {
+        my: "left bottom-20",
+        at: "left top",
+        using: function( position, feedback ) {
+          $( this ).css( position );
+          $( "<div>" )
+            .addClass( "arrow" )
+            .addClass( feedback.vertical )
+            .addClass( feedback.horizontal )
+            .appendTo( this );
+        }
+      }
+    });
+  });
+  </script>
+  <style>
+	  img {
+	alt:"award icon";
+	width:18px;
+	height:18px;
+	}
+  .ui-tooltip, .arrow:after {
+    background: black;
+    border: 2px solid white;
+  }
+  .ui-tooltip {
+    padding: 10px 20px;
+    color: white;
+    border-radius: 20px;
+    font: bold 14px "Helvetica Neue", Sans-Serif;
+    text-transform: uppercase;
+    box-shadow: 0 0 7px black;
+    max-width:400px;
+  }
+  .arrow {
+    width: 70px;
+    height: 16px;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    margin-left: -35px;
+    bottom: -16px;
+  }
+  .arrow.top {
+    top: -16px;
+    bottom: auto;
+  }
+  .arrow.left {
+    left: 20%;
+  }
+  .arrow:after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: -20px;
+    width: 25px;
+    height: 25px;
+    box-shadow: 6px 5px 9px -9px black;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    tranform: rotate(45deg);
+  }
+  .arrow.top:after {
+    bottom: -20px;
+    top: auto;
+  }
+  
+  .rmk{
+ margin-bottom:50px;
+  }
+  .center{
+	  text-align:center;
+  }
+  </style>
+  
+	</head>
+	<body>
+		<div class="container">
+		<div class="row navbar-fixed-top" id='header'>
+			<div class="col-md-8"></div>
+			<div class="col-md-4"><a href="{% url 'polls:index' %}"><h1>Polls & Choices</h1></a></div>
+		</div>
+		<div class="row" id="nav">
+		<div id="vote_fail" class="alert alert-danger alert-dismissable">
+			  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			  <strong>Fail!</strong> You Have Submitted the Vote Already.
+		</div>
+		<div id="vote_success" class="alert alert-success alert-dismissable">
+			  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			  <strong>Success!</strong> Vote Submitted Successfully.
+		</div>
+		</div>
+		<div class="row wite">
+		<div class="col-md-10"><h1>{{poll.question}}</h1></div>
+		<div class="col-md-2"></div>
+		</div>
+		<div class="row wite">
+			<div class="col-md-4">
+		{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+		<form action="" method="post" name="form1">
+			{% csrf_token %}
+			{% for choice in poll.choice_set.all %}
+				<div class="radio">
+				<input type="radio" name="choice{{poll.id}}" id="choice{{ forloop.counter }}" value = "{{ choice.id }}" />
+				<lable for="choice{{ forloop.counter }}" id="txt">{{choice.choice_text}}-- <span id="{{choice.id}}">{{ choice.votes }} </span>&nbsp;vote{{ choice.votes|pluralize }}<span id="test{{choice.id}}"></span></lable><br />
+				</div>
+			{% endfor %}
+			<div class="form-group">
+			<div>
+			<input type="submit" value="Vote" id="vote{{poll.id}}" class="btn btn-success " />
+			</div>
+			</div>
+		</form>
+		</div>
+		<div class="col-md-4"></div>
+		<div class="col-md-4"></div>
+		</div>
+		<div class="row wite">
+		<div class="col-md-8"><h2>You can comment here about the Poll</h2></div>
+		<div class="col-md-2"></div>
+		<div class="col-md-2"></div>
+		</div>
+		<div class="row wite">
+			<div class="col-md-8">
+		{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+		<form role="form" action="{% if user.is_authenticated %}
+			{% url 'polls:post_comment1' poll.id %}{% else %}{% url 'polls:login' poll.id %}{% endif %}" method="post" >{% csrf_token %}
+			<div class="form-group">
+			<textarea name="comment" id ="comment" placeholder="write your Comment here.." rows="4" cols="40" class="form-control" required></textarea>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-8 col-sm-4">
+			<input type="submit" value="Comment" class="btn btn-success btn-block" id="post" data-toggle="tooltip" data-placement="top"   />
+			</div>
+			</div>
+		</form>
+		</div>
+		<div class="col-md-2"></div>
+		<div class="col-md-2"></div>
+		</div>
+		<div class="row rmk wite">
+			<h2>Comments posted by users</h2>
+		<ul id="comments" class="example">
+			{% for comment in comments %}
+			<div class="pwite">
+				<li class="user opener">{{comment.username}}:</a></li>
+				<li data-toggle="tooltip" data-placement="top" title="UserName: {{comment.username}}&#13;<br/>
+				First-Name: {{comment.first_name}}&#13;<br/>
+				Last-Name: {{comment.last_name}}&#13;<br/>
+				E-Mail:{{comment.email}}&#13;<br/>
+				Joined on:{{comment.date_joined}}" >{{ comment.comment }}</li>
+			</div>
+			{% endfor %}
+		</ul>
+		<div class="pagination">
+			<span class="step-links">
+			{% if comments.has_next %}
+		    <a data-toggle="tooltip" title="more.." class="btn btn-info" id="ajax-call"  href="{% url 'polls:load_comments' poll.id %}?page={{ comments.next_page_number }}">Load More</a>
+			{% endif %}
+			</span>
+		</div>
+		</div>
+		<div class="row">
+			<nav class="navbar navbar-default navbar-fixed-bottom" id="footer" role="navigation">
+			<a class="navbar-brand" href="{% url 'polls:index' %}">Home</a>
+			<p class="navbar-text navbar-right">© 2014 Nyros Technologies. All Rights Reserved.</p>
+			</nav>
+		</div>
+<div class="modal"><!-- Place at bottom of page --></div>
+		</div>
+	<script type="text/javascript">
+		$(document).ready(function(){
+		$("#post").click(function(){
+			{% if user.is_authenticated %}
+		    return true;
+		    {% else %}
+		    alert("You need to login first,if not registered register")
+		    {% endif %}
+		});
+		$("#vote_fail").hide()
+		$("#vote_success").hide()
+		$("#ajax-call").click(function(e){
+			e.preventDefault();
+			$that = $(this)
+			$.ajax({
+				url:this.href,
+				type: 'GET',
+				dataType: 'json',
+				success:function(result){
+			        lis = "";
+			        window.rs = result
+			        poll_id = +result.details[1]
+			        //alert(result.details[0])
+			        if (result.details[0]){
+			        $that.attr('href', '/'+poll_id+'/load_comments?page='+result.details[0])
+				}
+				else{
+					$that.remove()
+					}
+					$.each(JSON.parse(result.comments), function(index, items){
+						lis += "<div class='pwite'><li class='user'>"+items.object[4]+":</li><li title='UserName:"+items.object[4]+"<br/>FirstName:"+items.object[5]+"<br/>LastName:"+items.object[6]+"<br/>E-Mail:"+items.object[7]+"'>"+items.object[0]+"</li></div>"
+						console.log(items.object[0]);
+						});
+       $("#comments").append(lis)
+  }
+				});
+	});
+			var create_vote{{poll.id}} = function() {
+			var value = $("form input[name='choice{{poll.id}}']:checked").val()
+			if(value!="")
+			{
+				var data={choice:value};
+				
+				var args={type:"POST", url:"/{{poll.id}}/ajaxvote/",data:data,success:create_vote_complete{{poll.id}},dataType: 'html'};
+				
+				$.ajax(args);
+			}
+			else
+			{
+				//some message here
+			}
+			return false;
+		};
+		$("#vote{{poll.id}}").click(create_vote{{poll.id}});
+		
+	var create_vote_complete{{poll.id}} = function(res,status,jqXHR){
+			if(status=="success"){
+				var value = $("form input[name='choice{{poll.id}}']:checked").val()
+				num = $("#"+value).text()
+				num = parseInt(num);
+				if (res==num)
+				{
+					$("#vote_fail").show()
+					$("form input[name='choice{{poll.id}}']:checked").prop('checked',false);
+				}
+				else{
+					$("#"+value).html(res+"&nbsp;");
+					$("#vote_success").show()
+					$("form input[name='choice{{poll.id}}']:checked").prop('checked',false);
+				}
+				x = document.form1.choice{{poll.id}}
+				z = new Array();
+				novotes = new Array();
+				for(var i=0;i<x.length;i++)
+				{
+				z[i] = x[i].value;
+				novotes[i] = parseInt($("#"+z[i]).text());
+			    }
+			    var maximum = Math.max.apply(Math,novotes)
+			    //alert(maximum);
+			    for(k=0;k<z.length;k++)
+			    {
+					if (maximum==parseInt($("#"+z[k]).text()))
+					{
+						$("#test"+z[k]).html('<img src="{% static "polls/images/icon.png" %}" alt="Winner"></img>');
+					}
+					else
+					{
+						$("#test"+z[k]).html("&nbsp");
+					}
+				}
+				//window.location.href="/polls/"
+			}
+			else
+			{
+				//display_message(res.responseText,$(".message"));
+				alert("You didn't select a choice to vote");
+			}
+		}	
+});
+        
+		
+	function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+function sameOrigin(url) {
+    // test that a given url is a same-origin URL
+    // url could be relative or scheme relative or absolute
+    var host = document.location.host; // host + port
+    var protocol = document.location.protocol;
+    var sr_origin = '//' + host;
+    var origin = protocol + sr_origin;
+    // Allow absolute or scheme relative URLs to same origin
+    return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+        (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+        // or any other URL that isn't scheme relative or absolute i.e relative.
+        !(/^(\/\/|http:|https:).*/.test(url));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+            // Send the token to same-origin, relative URLs only.
+            // Send the token only if the method warrants CSRF protection
+            // Using the CSRFToken value acquired earlier
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+$(document).ready(function(){
+	x = document.form1.choice{{poll.id}}
+				z = new Array();
+				novotes = new Array();
+				for(var i=0;i<x.length;i++)
+				{
+				z[i] = x[i].value;
+				novotes[i] = parseInt($("#"+z[i]).text());
+			    }
+			    var maximum = Math.max.apply(Math,novotes)
+			    //alert(maximum);
+			    for(k=0;k<z.length;k++)
+			    {
+					if (maximum==parseInt($("#"+z[k]).text()))
+					{
+						$("#test"+z[k]).html('<img src="{% static "polls/images/icon.png" %}" alt="Winner"></img>');
+					}
+					else
+					{
+						$("#test"+z[k]).html("&nbsp");
+					}
+				}
+			});
+			
+$body = $("body");
+$(document).on({
+    ajaxStart: function() { $body.addClass("loading");    },
+     ajaxStop: function() { $body.removeClass("loading"); }    
+});
+	
+</script>
+</body>
+</html>
+{% endblock %}
+

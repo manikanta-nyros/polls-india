@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load staticfiles %}
+<head>
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+<link href="{% static 'polls/css/3.css' %}" rel="stylesheet" media="screen">
+<script src="{% static 'polls/bootstrap.min.js' %}"></script>
+
+</head>
+<body>
+<div class="container">
+		<div class="row navbar-fixed-top" id='header'>
+			<div class="col-md-8"></div>
+			<div class="col-md-4"><a href="{% url 'polls:index' %}" ><h1>Polls & Choices</h1></a></div>
+		</div>
+	<div class="row" id="nav">	
+	<p><a class="btn btn-info" href="{% url 'polls:login2' %}">Go To LogIn Page</a></p>
+    <p>Enter your E-Mail Id we will send you the Details about the password.</p>
+    </div>
+    <div>
+		{% if error_message %}<p class="error"><strong>{{ error_message }}</strong></p>{% endif %}
+        <form class="form-inline" role="form" action="{% url 'polls:send_forgotpass' %}" method="post"> {% csrf_token %}
+        <div class="form-group">
+            <label class="sr-only" for="email">Email address</label>
+            <input type="email" name="email" id="email" required class="form-control" placeholder="Enter Your E-Mail"></input>
+        </div>
+         <input type="submit" name="send_email" value="Get Password" class="btn btn-success" />
+        </form>
+    </div>
+    <div class="row">
+			<nav class="navbar navbar-default navbar-fixed-bottom" id="footer" role="navigation">
+			<a class="navbar-brand" href="{% url 'polls:index' %}">Home</a>
+			<p class="navbar-text navbar-right">© 2014 Nyros Technologies. All Rights Reserved.</p>
+			</nav>
+		</div>
+    </div>
+</body>
+</html>
+{% endblock %}

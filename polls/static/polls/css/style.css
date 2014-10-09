@@ -1,0 +1,28 @@
+
+h1
+{
+	text-align:center;
+}
+
+.user
+{
+	background: url('images/user.png') no-repeat left;
+	padding-left:20px;
+}
+.female
+{
+	background: url('images/user_female.png') no-repeat left;
+	padding-left:20px;
+}
+.key
+{
+	background: url('images/key.png') no-repeat left;
+	padding-left:20px;
+
+}
+.phone
+{
+	background: url('images/phone.png') no-repeat left;
+	padding-left:20px;
+}
+

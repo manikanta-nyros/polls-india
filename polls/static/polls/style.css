@@ -1,0 +1,101 @@
+
+ul {
+	list-style-type: none;
+	}
+
+
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('http://i.stack.imgur.com/FhHRx.gif') 
+                50% 50% 
+                no-repeat;
+}
+body.loading {
+    overflow: hidden;   
+}
+
+body.loading .modal {
+    display: block;
+}
+h1{
+
+}
+.container{
+	background-color:#F8F8FF;
+}
+#header{
+	
+	/*background-color:#F3421F;*/
+	background: -webkit-linear-gradient(right, #F3421F , #E47511); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(left, #F3421F , #E47511); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(left, #F3421F , #E47511); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to left, #F3421F , #E47511); /* Standard syntax (must be last) */
+	}
+	#header a:hover{
+	text-decoration:none
+}
+	#header h1{
+		color:white;
+	}
+#content{
+	padding-top:20px;
+	padding-bottom:20px;
+	font-size:20px
+}
+#main{
+	background-color:#FFECE6;
+	margin-bottom:50px
+}
+#footer{
+	margin-top:10px;
+	background: -webkit-linear-gradient(right, #F3421F , #E47511); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(left, #F3421F , #E47511); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(left, #F3421F , #E47511); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to left, #F3421F , #E47511); /* Standard syntax (must be last) */
+}
+#footer a,#footer p{
+	color:white;
+	}
+#nav{
+	margin-top:100px;
+}
+.main{
+	background-color:
+}
+.rmk{
+	margin-bottom:50px;
+}
+#txt{
+	font-size:15px;
+}
+.user{
+	font:italic small-caps bold 18px arial,sans-serif;
+	font-weight:bold;
+}
+.profile{
+	border:1px solid black;
+	margin:15px;
+	padding: 10px;
+	background-color:	#FFFFFF;
+}
+.wite{
+	background-color:	#F8F8F8;
+	margin:10px;
+}
+.pwite{
+	background-color:#FFFFFF;
+	margin:5px;
+	border: 1px solid #DEDEDE;
+	padding:5px;
+}
+.nbar
+{
+	background-color:#D3D3D3;
+}

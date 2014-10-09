@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+{% block content %}
+{% load staticfiles %}
+{% load bootstrap_toolkit %}
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+        <link href="{% static 'polls/css/3.css' %}" rel="stylesheet" media="screen">
+        <link rel="stylesheet" type="text/css" href="{% static 'polls/css/jquery-ui.css' %}" />
+		<link rel="stylesheet" href="{% static 'polls/css/style1.css' %}" />
+		<link rel="stylesheet" href="{% static 'polls/css/jquery.rating.css' %}" />
+		<script src="{% static 'polls/js/jquery-1.10.2.js' %}"></script>
+		<script src="{% static 'polls/js/bootstrap.js' %}"></script>
+		<script src="{% static 'polls/js/jquery-ui.js' %}"></script>
+		<script src="{% static 'polls/js/jquery.rating.pack.js' %}"></script>
+<style>
+	h2 {
+		text-align:center;
+	}
+	img {
+	alt:"Profile pic";
+	width:64px;
+	height:64px;
+	}
+</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row navbar-fixed-top" id='header'>
+			<div class="col-md-8"></div>
+			<div class="col-md-4"><a href="{% url 'polls:index' %}" ><h1>Polls & Choices</h1></a></div>
+		</div>
+		<div class="row" id="nav">
+		</div>
+		<div class="row">
+		<div class="col-md-6">
+		<ul class="list-group">
+		<a href="#" class="list-group-item active">About User</a>
+		<li class="list-group-item">{{profile.username}}</li>
+		<li class="list-group-item">{{profile.first_name}}<span> </span> {{profile.last_name}}</li>
+		<li class="list-group-item">{{profile.email}}</li>
+		<li class="list-group-item"><span class="user">Using since : {{profile.date_joined}} </span></li>
+		</ul>
+		</div>
+		</div>
+		<div class="row" >
+<nav class="navbar navbar-default navbar-fixed-bottom " id="footer" role="navigation">
+	<a class="navbar-brand" href="{% url 'polls:index' %}">Home</a>
+	<p class="navbar-text navbar-right">© 2014 Nyros Technologies. All Rights Reserved.</p>
+</nav>
+</div>
+</div>
+</body>
+</html>
+{% endblock %}

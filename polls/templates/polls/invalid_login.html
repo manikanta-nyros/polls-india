@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load staticfiles %}
+<head>
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+</head>
+<body>
+	<h2>Your login details are invalid!</h2>
+	<p>Click <a href="/polls/login/">here</a> to login again.</p>
+{% endblock %}

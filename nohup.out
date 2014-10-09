@@ -1,0 +1,27 @@
+/home/nyros/manikanta/manikanta/Python/Django/code/polls/views.py:31: DeprecationWarning: django.utils.simplejson is deprecated; use json instead.
+  from django.utils import simplejson
+
+[26/Jun/2014 10:12:45] "GET / HTTP/1.1" 200 6580
+[26/Jun/2014 10:12:45] "GET /static/polls/css/3.css HTTP/1.1" 304 0
+[26/Jun/2014 10:12:45] "GET /static/polls/css/jquery-ui.css HTTP/1.1" 304 0
+[26/Jun/2014 10:12:45] "GET /static/polls/style.css HTTP/1.1" 304 0
+[26/Jun/2014 10:12:45] "GET /static/polls/css/style1.css HTTP/1.1" 304 0
+[26/Jun/2014 10:12:45] "GET /static/polls/css/jquery.rating.css HTTP/1.1" 304 0
+[26/Jun/2014 10:12:45] "GET /static/polls/js/jquery-1.10.2.js HTTP/1.1" 304 0
+[26/Jun/2014 10:12:45] "GET /static/polls/js/bootstrap.js HTTP/1.1" 304 0
+[26/Jun/2014 10:12:45] "GET /static/polls/js/jquery-ui.js HTTP/1.1" 304 0
+[26/Jun/2014 10:12:45] "GET /static/polls/js/jquery.rating.pack.js HTTP/1.1" 304 0
+[26/Jun/2014 10:12:46] "GET /static/polls/css/delete.gif HTTP/1.1" 304 0
+[26/Jun/2014 10:12:46] "GET /static/polls/css/star.gif HTTP/1.1" 304 0
+[26/Jun/2014 10:12:54] "GET / HTTP/1.1" 200 6580
+[26/Jun/2014 10:12:54] "GET /static/polls/style.css HTTP/1.1" 304 0
+[26/Jun/2014 10:12:54] "GET /static/polls/css/3.css HTTP/1.1" 304 0
+[26/Jun/2014 10:12:54] "GET /static/polls/css/style1.css HTTP/1.1" 304 0
+[26/Jun/2014 10:12:54] "GET /static/polls/css/jquery-ui.css HTTP/1.1" 304 0
+[26/Jun/2014 10:12:54] "GET /static/polls/css/jquery.rating.css HTTP/1.1" 304 0
+[26/Jun/2014 10:12:54] "GET /static/polls/js/jquery-1.10.2.js HTTP/1.1" 304 0
+[26/Jun/2014 10:12:54] "GET /static/polls/js/bootstrap.js HTTP/1.1" 304 0
+[26/Jun/2014 10:12:54] "GET /static/polls/js/jquery-ui.js HTTP/1.1" 304 0
+[26/Jun/2014 10:12:54] "GET /static/polls/js/jquery.rating.pack.js HTTP/1.1" 304 0
+[26/Jun/2014 10:12:55] "GET /static/polls/css/delete.gif HTTP/1.1" 304 0
+[26/Jun/2014 10:12:55] "GET /static/polls/css/star.gif HTTP/1.1" 304 0

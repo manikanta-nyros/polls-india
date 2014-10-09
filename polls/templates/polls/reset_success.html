@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load staticfiles %}
+<head>
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+<link href="{% static 'polls/css/3.css' %}" rel="stylesheet" media="screen">
+<script src="{% static 'polls/bootstrap.min.js' %}"></script>
+</head>
+<body>
+<div class="container">
+		<div class="row navbar-fixed-top" id='header'>
+			<div class="col-md-8"></div>
+			<div class="col-md-4"><a href="{% url 'polls:index' %}" ><h1>Polls & Choices</h1></a></div>
+		</div>
+	<div class="row" id="nav">
+	<p>Your Password has been set, You can  <a class="btn btn-success" href="{% url 'polls:login2' %}">LogIn</a> Now..</p>
+	</div>
+	<div class="row">
+			<nav class="navbar navbar-default navbar-fixed-bottom" id="footer" role="navigation">
+			<a class="navbar-brand" href="{% url 'polls:index' %}">Home</a>
+			<p class="navbar-text navbar-right">© 2014 Nyros Technologies. All Rights Reserved.</p>
+			</nav>
+		</div>
+	</div>
+	</body>
+</html>
+{% endblock %}

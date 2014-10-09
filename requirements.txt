@@ -1,0 +1,8 @@
+Django==1.6.5
+South==0.8.4
+registration
+bootstrap_toolkit
+djangoratings
+avatar
+haystack
+django_nose

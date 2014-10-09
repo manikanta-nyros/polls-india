@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+{% block content %}
+{% load staticfiles %}
+{% load bootstrap_toolkit %}
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+        <link href="{% static 'polls/css/3.css' %}" rel="stylesheet" media="screen">
+        <link rel="stylesheet" type="text/css" href="{% static 'polls/css/jquery-ui.css' %}" />
+		<link rel="stylesheet" href="{% static 'polls/css/style1.css' %}" />
+		<link rel="stylesheet" href="{% static 'polls/css/jquery.rating.css' %}" />
+		<script src="{% static 'polls/js/jquery-1.10.2.js' %}"></script>
+		<script src="{% static 'polls/js/bootstrap.js' %}"></script>
+		<script src="{% static 'polls/js/jquery-ui.js' %}"></script>
+		<script src="{% static 'polls/js/jquery.rating.pack.js' %}"></script>
+<style>
+	h2 {
+		text-align:center;
+	}
+	img {
+	alt:"Profile pic";
+	width:64px;
+	height:64px;
+	}
+</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row navbar-fixed-top" id='header'>
+			<div class="col-md-8"></div>
+			<div class="col-md-4"><a href="{% url 'polls:index' %}" ><h1>Polls & Choices</h1></a></div>
+		</div>
+		
+	<div class="row" id="nav">
+	<div class="col-md-4"></div>
+	<div class="col-md-4"><h1>All Users</h1></div>
+	<div class="col-md-4"></div>
+	</div>
+	<div class="row">
+	{% for user in allusers %}
+	<div class="col-md-5 profile">
+		<div class="media">
+		<a class="pull-left" href="{% url 'polls:profile' user.id %}">
+			<img class="media-object" src="{% static 'polls/images/800px-Smiley.svg.png' %}" alt="...">
+		</a>
+		{% load avatar_tags %}
+		{% avatar user 65 %}
+		<div class="media-body">
+		<h4 class="media-heading"><span class="user">Username: </span>{{user.username}}</h4>
+		<button class="btn btn-info"type="button" onclick="">Follow User</button>
+		</div>
+		</div>
+		</div>
+	{% endfor %}
+	</div>
+	<div class="row" >
+<nav class="navbar navbar-default navbar-fixed-bottom " id="footer" role="navigation">
+	<a class="navbar-brand" href="{% url 'polls:index' %}">Home</a>
+	<p class="navbar-text navbar-right">© 2014 Nyros Technologies. All Rights Reserved.</p>
+</nav>
+</div>
+</div>
+</body>
+</html>
+{% endblock %}

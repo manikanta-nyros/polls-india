@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load staticfiles %}
+<head>
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+<link href="{% static 'polls/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+<script src="{% static 'polls/bootstrap.min.js' %}"></script>
+<style>
+	p{
+		color:green;
+	}
+
+</style>
+</head>
+<body>
+    <p>email containing account-activation information has been sent.</p>
+</body>
+</html>
+{% endblock %}

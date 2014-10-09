@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load staticfiles %}
+<head>
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+</head>
+<body>
+	<h2>hi {{full_name}} you are now logged in</h2>
+	<p>Click <a href="/polls/logout/">here</a> to logout.</p>
+
+{% endblock %}

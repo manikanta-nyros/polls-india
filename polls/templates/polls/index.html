@@ -1,0 +1,230 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+{% block content %}
+{% load staticfiles %}
+{% load bootstrap_toolkit %}
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+        <link href="{% static 'polls/css/3.css' %}" rel="stylesheet" media="screen">
+        <link rel="stylesheet" type="text/css" href="{% static 'polls/css/jquery-ui.css' %}" />
+		<link rel="stylesheet" href="{% static 'polls/css/style1.css' %}" />
+		<link rel="stylesheet" href="{% static 'polls/css/jquery.rating.css' %}" />
+		<script src="{% static 'polls/js/jquery-1.10.2.js' %}"></script>
+		<script src="{% static 'polls/js/bootstrap.js' %}"></script>
+		<script src="{% static 'polls/js/jquery-ui.js' %}"></script>
+		<script src="{% static 'polls/js/jquery.rating.pack.js' %}"></script>
+<style>
+	h2 {
+		text-align:center;
+	}
+</style>
+<script>
+	$(document).ready(function(){
+		{% for rating in ratings%}
+			$("input[name='star1{{rating.poll_id}}'][value='{{rating.rating}}']").rating("select", {{rating.rating}}-1);
+
+		{% endfor %}
+	});
+
+	
+	function myFunction1(){
+		var radios = document.getElementsByName('star11');
+		poll_id = 1;
+		rating = 0;
+		for (var i=0, length = radios.length; i<length;i++){
+			if(radios[i].checked){
+				rating = radios[i].value;
+				break;
+			}
+			else{
+				rating = 0;
+			}
+		}
+		$.ajax({
+					url:'/{{user_id}}/post_ratings/',
+					type: 'GET',
+					data: {
+						"rating":rating,
+						"poll_id": poll_id
+					},
+					dataType: 'json',
+					success:function(result){
+						alert('success')
+					}
+				})
+	}
+	function myFunction2(){
+		var radios = document.getElementsByName('star12');
+		poll_id = 2;
+		rating = 0;
+		for (var i=0, length = radios.length; i<length;i++){
+			if(radios[i].checked){
+				rating = radios[i].value;
+				break;
+			}
+			else{
+				rating = 0;
+			}
+		}
+					$.ajax({
+					url:'/{{user_id}}/post_ratings/',
+					type: 'GET',
+					data: {
+						"rating":rating,
+						"poll_id": poll_id
+					},
+					dataType: 'json',
+					success:function(result){
+						alert ('success');
+					}
+				})
+	}
+	function myFunction3(){
+		var radios = document.getElementsByName('star13');
+		poll_id = 3;
+		rating = 0;
+		for (var i=0, length = radios.length; i<length;i++){
+			if(radios[i].checked){
+				rating = radios[i].value;
+				break;
+			}
+			else{
+				rating = 0;
+			}
+		}
+		$.ajax({
+					url:'/{{user_id}}/post_ratings/',
+					type: 'GET',
+					data: {
+						"rating":rating,
+						"poll_id": poll_id
+					},
+					dataType: 'json',
+					success:function(result){
+						alert ('success');
+					}
+				})
+	}
+</script>
+
+</head>
+<body>
+	<div class="container">
+		<div class="row navbar-fixed-top" id='header'>
+			<div class="col-md-8"></div>
+			<div class="col-md-4"><a href="{% url 'polls:index' %}" ><h1>Polls & Choices</h1></a></div>
+		</div>
+	<div class="main">
+	{% if user.is_authenticated %}
+	<div class="row" id="nav">
+    <nav class="navbar navbar-default nbar" role="navigation">
+		<div class="container-fluid nbar">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="{% url 'polls:index' %}">Home</a>
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+		<li><a href="/admin/">Admin Section</a></li>
+		<li><a href="{% url 'polls:manage_account' user_id %}">Manage Account</a></li>
+        <li><a href="{% url 'auth:logout' %}?next={{ request.path }}">Log Out</a></li>      
+       </ul>
+        <ul class="nav navbar-nav navbar-right">
+		  <li><a href="{% url 'polls:profile' user.id %}">{{full_name}}</a></li>
+          <li><a href="{% url 'polls:allusers' %}">All Users</a></li>
+       </ul>
+      </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+</div>
+{% else %}
+<div class="row" id="nav">
+    <nav class="navbar navbar-default " role="navigation">
+		<div class="container-fluid nbar">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="{% url 'polls:index' %}">Home</a>
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+        <li><a href="{% url 'polls:register_user1' %}">Sign Up</a></li>
+        <li><a href="/admin/">Admin Section</a></li>
+        <li class="dropdown nbar">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Log In <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+			<li><a href="{% url 'polls:login2' %}">Sign In</a></li>
+			<li class="divider"></li>
+            <li><a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Log In with Facebook</a></li>
+            <li><a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">Log In with Google</a></li>
+            <li><a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">Log In with Twitter</a></li>
+          </ul>
+        </li>
+       </ul>
+        <ul class="nav navbar-nav navbar-right">
+		  
+          <li><a href="{% url 'polls:allusers' %}">All Users</a></li>
+       </ul>
+      </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+</div>
+{% endif %}
+<div class="row">
+{% if messages %}
+		<div class="alert alert-danger alert-dismissable">
+			    {% for message in messages %}
+			  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			  <strong>{{ message }}</strong>
+			  {% endfor %}
+		</div>
+{% endif %}
+</div>
+<div class="row" id="main">	
+{% if latest_poll_list %}
+    {% for poll in latest_poll_list %}
+    <div class="row pwite" id="content">
+		<div class="col-md-6">
+        <span style="color:#C96060">{{poll.id}}</span> .<a href="{% url 'polls:detail' poll.id %}">{{poll.question}}</a> 
+       </div>
+       <div class="col-md-4">
+        <form action="" onclick="myFunction{{poll.id}}()">
+			<input name="star1{{poll.id}}" type="radio" class="star" value='1' /> 
+			<input name="star1{{poll.id}}" type="radio" class="star" value='2' /> 
+			<input name="star1{{poll.id}}" id="three{{poll.id}}" type="radio" class="star" value='3'  /> 
+			<input name="star1{{poll.id}}" type="radio" class="star" value='4' /> 
+			<input name="star1{{poll.id}}" type="radio" class="star" value='5' />
+		</form>
+		</div>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No Polls are available</p>
+{% endif %}
+</div>
+</div>
+<div class="row" >
+<nav class="navbar navbar-default navbar-fixed-bottom " id="footer" role="navigation">
+	<a class="navbar-brand" href="{% url 'polls:index' %}">Home</a>
+	<p class="navbar-text navbar-right">© 2014 Nyros Technologies. All Rights Reserved.</p>
+</nav>
+</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".alert").alert();
+	});
+</script>
+</body>
+</html>
+{% endblock %}

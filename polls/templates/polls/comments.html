@@ -1,0 +1,3 @@
+{% for comments in poll.comment_set.all %}
+<p>{{ comments.comment }}</p>
+{% endfor %}
